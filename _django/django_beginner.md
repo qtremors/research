@@ -5,8 +5,6 @@ title: "Django for Beginners"
 
 # A Comprehensive Guide to Django for the Beginner Python Developer
 
----
-
 ## I. Introduction to the Django Philosophy: More Than Just Code
 
 For a Python developer venturing into web development, choosing a framework is a foundational decision. Django stands out not merely as a collection of tools, but as a framework with a distinct and powerful philosophy. Understanding the "why" behind its design is the first step toward mastering its capabilities.
@@ -537,6 +535,7 @@ Two of the most essential tags are `{% if %}` for conditional logic and `{% for 
 
 This example demonstrates how to display a list of questions, with a fallback message if the list is empty:
 
+{% raw %}
 ```django
 {% if latest_question_list %}
     <ul>
@@ -548,6 +547,7 @@ This example demonstrates how to display a list of questions, with a fallback me
     <p>No polls are available.</p>
 {% endif %}
 ```
+{% endraw %}
 
 ### The Power of Template Inheritance: `{% extends %}` and `{% block %}`
 
@@ -557,6 +557,7 @@ This technique is a direct implementation of the DRY principle for the presentat
 
 **Parent Template (`base.html`):**
 
+{% raw %}
 ```django
 <!DOCTYPE html>
 <html lang="en">
@@ -576,9 +577,11 @@ This technique is a direct implementation of the DRY principle for the presentat
 </body>
 </html>
 ```
+{% endraw %}
 
 **Child Template (`index.html`):**
 
+{% raw %}
 ```django
 {% extends "base.html" %}
 
@@ -592,6 +595,7 @@ This technique is a direct implementation of the DRY principle for the presentat
     {% endif %}
 {% endblock %}
 ```
+{% endraw %}
 
 The `{% extends "base.html" %}` tag must be the very first tag in the child template. When rendered, Django will load `base.html` and replace the contents of the `title` and `content` blocks with the content defined in `index.html`.25
 
@@ -646,10 +650,12 @@ Websites require assets like CSS, JavaScript, and images, which Django refers to
     
 - **Using in Templates:** To use static files in your templates, you must first use the `{% load static %}` tag. Then, the `{% static %}` tag will generate the correct URL for a given file path.29
     
+    {% raw %}
     ```django
     {% load static %}
     <link rel="stylesheet" href="{% static 'polls/style.css' %}">
     ```
+    {% endraw %}
     
 - **Production:** During development, the `runserver` command automatically serves static files. For production, this method is inefficient and insecure.29 Instead, you run the `python manage.py collectstatic` command, which gathers all static files from your apps into a single directory defined by the `STATIC_ROOT` setting. A production web server like Nginx is then configured to serve these files directly.29
     
@@ -674,6 +680,7 @@ Handling form submissions is a fundamental part of web applications. Django prov
     
     1. **The Template:** In the template, the form can be rendered easily. The `{% csrf_token %}` tag is a mandatory security measure to prevent Cross-Site Request Forgery attacks.33
         
+        {% raw %}
         ```django
         <form action="/your-url/" method="post">
             {% csrf_token %}
@@ -681,6 +688,7 @@ Handling form submissions is a fundamental part of web applications. Django prov
             <input type="submit" value="Submit">
         </form>
         ```
+        {% endraw %}
         
         `{{ form.as_p }}` renders the form fields wrapped in `<p>` tags.
         
