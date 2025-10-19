@@ -14,3 +14,6 @@ collections:
   python:
     output: true
     permalink: /:collection/:name
+  django:
+    output: true
+    permalink: /:collection/:name

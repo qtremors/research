@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Python for Beginners"
+title: "Python for Intermediates"
 ---
 
 # The Intermediate Python Developer's Compendium: From Proficient to Expert
@@ -44,10 +44,7 @@ Python supports several forms of inheritance:
     
 - **Multiple Inheritance:** A child class inherits from two or more parent classes. This allows a class to combine behaviors from multiple sources but introduces complexity in how methods are resolved.20
     
-
-Python
-
-```
+```python
 # Single Inheritance
 class Vehicle:
     def move(self):
@@ -75,9 +72,7 @@ When a class inherits from multiple parents, Python needs a deterministic rule t
 
 Modern Python versions use the **C3 Linearization algorithm** to compute the MRO. This algorithm creates a consistent and predictable order of classes to search for a method. Its key properties are that a child class is always checked before its parents, and the order of parent classes in the class definition is preserved.22 The MRO for any class can be inspected using the `__mro__` attribute or the `.mro()` method.23
 
-Python
-
-```
+```python
 # Demonstrating MRO
 class A: pass
 class B(A): pass
@@ -97,9 +92,7 @@ A common misconception is that `super()` calls the parent class. While this appe
 
 This distinction is fundamental to designing "cooperative multiple inheritance." When each class in a hierarchy calls `super()`, it's not just calling its parent; it's invoking the next method in the chain defined by the MRO. This ensures that every implementation in the hierarchy is called in the correct order and exactly once, which is essential for tasks like ensuring all `__init__` methods in a complex inheritance graph are executed properly.17
 
-Python
-
-```
+```python
 class A:
     def __init__(self):
         print("Initializing A")
@@ -136,10 +129,7 @@ These methods are not just convenient hooks; they represent Python's core "proto
         
     - `__repr__(self)` should return an unambiguous, developer-focused string that, ideally, is a valid Python expression that can recreate the object. It is called by the interactive interpreter and the `repr()` function.31 If `__str__` is not defined, Python will fall back to using `__repr__`.36
         
-    
-    Python
-    
-    ```
+    ```python
     import datetime
     today = datetime.date.today()
     
@@ -179,10 +169,7 @@ Python classes support three types of methods, distinguished by their first argu
     
 - **Static Methods:** Decorated with `@staticmethod`, these methods do not receive any implicit first argument (neither `self` nor `cls`). They are essentially regular functions namespaced within the class and cannot modify instance or class state.13 They are used for utility functions that are logically connected to the class but do not depend on its state.
     
-
-Python
-
-```
+```python
 class MyClass:
     class_variable = "I am a class variable"
 
@@ -214,9 +201,7 @@ Comprehensions are a hallmark of idiomatic Python, providing a compact syntax fo
 
 - **List Comprehension:** Creates a new list. The syntax is `[expression for member in iterable]`.38
     
-    Python
-    
-    ```
+    ```python
     # Traditional for loop
     squares =
     for x in range(10):
@@ -229,9 +214,7 @@ Comprehensions are a hallmark of idiomatic Python, providing a compact syntax fo
     
 - **Dictionary Comprehension:** Creates a new dictionary. The syntax is `{key_expression: value_expression for member in iterable}`.40
     
-    Python
-    
-    ```
+    ```python
     # Create a dictionary of numbers and their squares
     squares_dict = {x: x**2 for x in range(5)}
     # Result: {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
@@ -239,9 +222,7 @@ Comprehensions are a hallmark of idiomatic Python, providing a compact syntax fo
     
 - **Set Comprehension:** Creates a new set, automatically handling uniqueness. The syntax is `{expression for member in iterable}`.42
     
-    Python
-    
-    ```
+    ```python
     # Create a set of unique first letters from a list of words
     words = ['apple', 'banana', 'apricot', 'blueberry', 'cherry']
     first_letters = {word for word in words}
@@ -255,9 +236,7 @@ Comprehensions can be extended with conditional logic to perform both filtering 
 
 - **Conditional Logic (`if`):** A filtering `if` clause can be added to the end of the comprehension to include only elements that satisfy a condition.37
     
-    Python
-    
-    ```
+    ```python
     # Get squares of only even numbers
     even_squares = [x**2 for x in range(10) if x % 2 == 0]
     # Result: 
@@ -265,9 +244,7 @@ Comprehensions can be extended with conditional logic to perform both filtering 
     
 - **Conditional Expression (`if/else`):** To transform elements differently based on a condition, a conditional expression can be used at the beginning of the comprehension.38
     
-    Python
-    
-    ```
+    ```python
     # Label numbers as 'even' or 'odd'
     labels = ['even' if x % 2 == 0 else 'odd' for x in range(10)]
     # Result: ['even', 'odd', 'even', 'odd',...]
@@ -275,9 +252,7 @@ Comprehensions can be extended with conditional logic to perform both filtering 
     
 - **Nested Comprehensions:** Comprehensions can be nested to work with nested iterables, such as a list of lists. The order of the `for` clauses mirrors the order of nested `for` loops.37
     
-    Python
-    
-    ```
+    ```python
     # Flatten a matrix (list of lists)
     matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     
@@ -316,9 +291,7 @@ Syntax: lambda arguments: expression
 
 Lambda functions are most useful when a small, single-use function is needed, particularly as an argument to higher-order functions like `map`, `filter`, and `reduce`.46
 
-Python
-
-```
+```python
 from functools import reduce
 
 numbers = [1, 2, 3, 4, 5]
@@ -345,9 +318,7 @@ The core principle behind generators is **lazy evaluation**. The code within the
 
 This behavior makes generators extremely memory-efficient, as they produce values one at a time and do not need to store the entire sequence in memory. This makes them ideal for working with very large datasets, data streams, or even infinite sequences.52
 
-Python
-
-```
+```python
 # A generator function for the Fibonacci sequence (an infinite sequence)
 def fibonacci_generator():
     a, b = 0, 1
@@ -369,9 +340,7 @@ For simple generators, a more concise syntax is available: the generator express
 
 Syntax: `(expression for member in iterable)`
 
-Python
-
-```
+```python
 # List comprehension (builds a full list in memory)
 list_comp = [x**2 for x in range(1000)]
 
@@ -400,10 +369,7 @@ A class can function as a context manager by implementing two magic methods:
     
 - `__exit__(self, exc_type, exc_value, exc_traceback)`: Called when exiting the `with` block. It performs cleanup actions. If an exception occurred within the block, the type, value, and traceback are passed as arguments. If this method returns `True`, the exception is suppressed; otherwise, it is re-raised after the method completes.59
     
-
-Python
-
-```
+```python
 class ManagedFile:
     def __init__(self, filename, mode):
         self.filename = filename
@@ -433,10 +399,7 @@ The `contextlib` module provides the `@contextmanager` decorator, which offers a
     
 - The code after the `yield` statement serves as the teardown (`__exit__`). To ensure cleanup happens even if an error occurs, this code should be placed in a `finally` block.58
     
-
-Python
-
-```
+```python
 from contextlib import contextmanager
 
 @contextmanager
@@ -467,9 +430,7 @@ At its core, a decorator is a callable (usually a function) that takes another f
 
 The typical structure involves an outer function (the decorator) that defines and returns an inner "wrapper" function. This wrapper function contains the new functionality and also executes the original function passed to the decorator.64
 
-Python
-
-```
+```python
 def my_decorator(func):
     def wrapper():
         print("Something is happening before the function is called.")
@@ -491,9 +452,7 @@ This pattern of wrapping a function to add functionality is a form of Aspect-Ori
 
 Python provides a clean, readable syntax for applying decorators using the `@` symbol. This is known as "syntactic sugar" because it simplifies a common pattern.63 The `@my_decorator` syntax placed directly above a function definition is exactly equivalent to the explicit assignment `say_whee = my_decorator(say_whee)`.64
 
-Python
-
-```
+```python
 @my_decorator
 def say_whee():
     print("Whee!")
@@ -507,9 +466,7 @@ To be truly useful, decorators must be able to handle more complex scenarios.
 
 - **Decorating Functions with Arguments:** A simple wrapper with no parameters will fail if the decorated function accepts arguments. To create a general-purpose decorator, the inner wrapper function must be defined to accept any combination of positional and keyword arguments using the `*args` and `**kwargs` syntax, and then pass them along to the original function.64
     
-    Python
-    
-    ```
+    ```python
     def decorator_with_args(func):
         def wrapper(*args, **kwargs):
             print("Before call")
@@ -521,9 +478,7 @@ To be truly useful, decorators must be able to handle more complex scenarios.
     
 - **Preserving Function Metadata (`functools.wraps`):** A side effect of decorating is that the original function's metadata (like its name `__name__` and docstring `__doc__`) is replaced by the wrapper function's metadata. This can interfere with debugging and introspection. To solve this, the standard library provides `@functools.wraps`, a decorator for your wrapper function that copies the relevant metadata from the original function to the wrapper.69
     
-    Python
-    
-    ```
+    ```python
     from functools import wraps
     
     def my_decorator(func):
@@ -536,9 +491,7 @@ To be truly useful, decorators must be able to handle more complex scenarios.
     
 - **Creating Decorators with Arguments:** Sometimes it is useful for the decorator itself to accept arguments, such as `@repeat(num_times=3)`. This requires an additional layer of nesting. An outer function accepts the decorator's arguments and returns the decorator function itself. This returned decorator then accepts the function to be decorated and proceeds as usual.19
     
-    Python
-    
-    ```
+    ```python
     def repeat(num_times):
         def decorator_repeat(func):
             @wraps(func)
@@ -588,10 +541,7 @@ The key implication of the GIL is that in the standard CPython interpreter, a mu
     
 - **Example:** A common use case is downloading multiple web pages. While one thread is waiting for a server to respond, the GIL is released, and another thread can start its own network request. The `concurrent.futures.ThreadPoolExecutor` provides a high-level interface for managing a pool of worker threads.78
     
-
-Python
-
-```
+```python
 import concurrent.futures
 import requests
 import time
@@ -624,10 +574,7 @@ print(f"Downloaded {len(URLS)} URLs in {end_time - start_time:.2f} seconds.")
     
 - **Example:** The `concurrent.futures.ProcessPoolExecutor` offers a similar high-level API to its thread-based counterpart, making it easy to switch between models.73
     
-
-Python
-
-```
+```python
 import concurrent.futures
 import time
 
@@ -656,10 +603,7 @@ print(f"Completed CPU-bound tasks in {end_time - start_time:.2f} seconds.")
     
 - **Example:** Fetching multiple URLs asynchronously requires an async-compatible HTTP library like `aiohttp`.81
     
-
-Python
-
-```
+```python
 import asyncio
 import aiohttp
 import time
@@ -710,9 +654,7 @@ Beyond bug detection, type hints serve as a form of machine-verifiable documenta
 
 - **Basic Syntax:** Type hints are added using a colon after a variable or parameter name, and an arrow (`->`) for return values.85
     
-    Python
-    
-    ```
+    ```python
     name: str = "Alice"
     
     def greet(name: str) -> str:
@@ -773,9 +715,7 @@ This module provides specialized container datatypes that serve as powerful alte
 
 - **`Counter`:** A `dict` subclass designed for counting hashable objects. It takes an iterable as input and returns a dictionary-like object where keys are the items and values are their frequencies.107
     
-    Python
-    
-    ```
+    ```python
     from collections import Counter
     word_counts = Counter("abracadabra")
     # Output: Counter({'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1})
@@ -785,9 +725,7 @@ This module provides specialized container datatypes that serve as powerful alte
     
 - **`defaultdict`:** A `dict` subclass that avoids `KeyError` exceptions. It accepts a factory function in its constructor (e.g., `int`, `list`, `set`) which is called to provide a default value for a key that has not yet been set.106 This is particularly useful for grouping or counting items.
     
-    Python
-    
-    ```
+    ```python
     from collections import defaultdict
     
     s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
@@ -799,9 +737,7 @@ This module provides specialized container datatypes that serve as powerful alte
     
 - **`namedtuple`:** A factory function for creating tuple subclasses with named fields. This bridges the gap between the immutability and low overhead of tuples and the readability of objects with attributes. It allows accessing elements by name (`point.x`) as well as by index (`point`), making code more self-documenting.108
     
-    Python
-    
-    ```
+    ```python
     from collections import namedtuple
     
     Point = namedtuple('Point', ['x', 'y'])
@@ -830,10 +766,7 @@ The `itertools` module is a treasure trove of functions for creating and combini
         
     - `combinations(iterable, r)`: Returns `r`-length subsequences of elements. Order does not matter, and elements are not repeated within a combination.104
         
-
-Python
-
-```
+```python
 from itertools import combinations, cycle, chain
 
 # Combinations
@@ -854,9 +787,7 @@ This module contains higher-order functions that act on or return other function
 
 - **`lru_cache`:** A decorator that adds memoization to a function. It caches the results of function calls with specific arguments, so that subsequent calls with the same arguments return the cached result instantly instead of re-computing it. This is extremely useful for optimizing expensive or recursive functions.63
     
-    Python
-    
-    ```
+    ```python
     from functools import lru_cache
     import time
     
@@ -875,9 +806,7 @@ This module contains higher-order functions that act on or return other function
     
 - **`partial`:** Creates a new function with some of the arguments of an existing function "frozen." This is useful for creating specialized versions of a general function.69
     
-    Python
-    
-    ```
+    ```python
     from functools import partial
     
     def power(base, exponent):

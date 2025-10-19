@@ -2,6 +2,7 @@
 layout: default
 title: "Python for Beginners"
 ---
+
 # The Python Foundation: A Comprehensive Guide for the Aspiring Developer
 
 ---
