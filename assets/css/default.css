@@ -13,10 +13,10 @@
 
         --heading-h1: #e0e0e0; /* Bright White */
         --heading-h2: #8ab4f8; /* Light Blue */
-        --heading-h3: #81c995; /* Green */
-        --heading-h4: #fdd663; /* Yellow */
-        --heading-h5: #c58af9; /* Purple */
-        --heading-h6: #78d9c0; /* Teal */
+        --heading-h3: #78d9c0; /* Teal */
+        --heading-h4: #c58af9; /* Purple */
+        --heading-h5: #81c995; /* Green */
+        --heading-h6: #fdd663; /* Yellow */
     }
 
     body {
