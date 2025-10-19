@@ -12,11 +12,12 @@
         --tag-background: #2c2935;
 
         --heading-h1: #e0e0e0; /* Bright White */
-        --heading-h2: #8ab4f8; /* Light Blue */
-        --heading-h3: #78d9c0; /* Teal */
+        --heading-h2: #EBEBEB; /* Off-White / Silver */
+        --heading-h3: #8ab4f8; /* Light Blue */
         --heading-h4: #c58af9; /* Purple */
-        --heading-h5: #81c995; /* Green */
-        --heading-h6: #fdd663; /* Yellow */
+        --heading-h5: #C3F87A; /* Energetic Yellow-Green */
+        --heading-h6: #74C7A3; /* Muted Emerald Green */
+        
     }
 
     body {
