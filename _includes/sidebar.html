@@ -1,0 +1,53 @@
+<div class="sidebar-header">
+    <a href="{{ '/' | relative_url }}" class="sidebar-title-link">
+        <h3>Research Archive</h3>
+    </a>
+    <button class="sidebar-toggle-button" aria-label="Toggle sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left-close"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></svg>
+    </button>
+</div>
+
+<nav class="sidebar-nav">
+    <ul class="nav-list root-list">
+        <li>
+            <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}is-active{% endif %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span>Home</span>
+            </a>
+        </li>
+    </ul>
+
+    <h4 class="nav-collection-title">
+        <img src="{{ '/assets/python.svg' | relative_url }}" alt="Python Icon" width="16" height="16">
+        Python
+    </h4>
+    <ul class="nav-list">
+        {% assign notes = site.python | sort: 'title' %}
+        {% for note in notes %}
+            <li>
+                <a href="{{ note.url | relative_url }}" class="nav-link {% if page.url == note.url %}is-active{% endif %}">
+                    <span>{{ note.title | default: "Untitled Note" }}</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="nav-empty">No notes yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h4 class="nav-collection-title">
+        <img src="{{ '/assets/django.svg' | relative_url }}" alt="Django Icon" width="16" height="16">
+        Django
+    </h4>
+    <ul class="nav-list">
+        {% assign notes = site.django | sort: 'title' %}
+        {% for note in notes %}
+            <li>
+                <a href="{{ note.url | relative_url }}" class="nav-link {% if page.url == note.url %}is-active{% endif %}">
+                    <span>{{ note.title | default: "Untitled Note" }}</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="nav-empty">No notes yet.</li>
+        {% endfor %}
+    </ul>
+</nav>

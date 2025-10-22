@@ -1,0 +1,213 @@
+/*
+ * Main layout structure for sidebar, resizer, and content
+ * Mimics an Obsidian-style layout
+ */
+
+:root {
+    /* Set default sidebar width, can be overridden by JS */
+    --sidebar-width: 260px;
+    --sidebar-min-width: 220px;
+    --sidebar-max-width: 500px;
+}
+
+/* Remove default padding/margin from body for the vh-based layout */
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden; /* Prevent body from scrolling */
+}
+
+.page-wrapper {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 3px 1fr;
+    grid-template-rows: 100vh;
+    height: 100vh;
+    background-color: var(--background-primary);
+}
+
+.sidebar {
+    grid-column: 1;
+    background-color: var(--background-secondary);
+    border-right: 1px solid var(--background-modifier-border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: width 0.2s ease-in-out;
+}
+
+.sidebar-resizer {
+    grid-column: 2;
+    cursor: col-resize;
+    background-color: var(--background-modifier-border);
+    transition: background-color 0.2s;
+    z-index: 10;
+}
+
+.sidebar-resizer:hover {
+    background-color: var(--interactive-accent);
+}
+
+.content-wrapper {
+    grid-column: 3;
+    overflow-y: auto; /* This is now the main scrollable area */
+    height: 100vh;
+}
+
+/* --- Sidebar Content Styling --- */
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0.75rem 1rem 1.5rem;
+    border-bottom: 1px solid var(--background-modifier-border);
+    flex-shrink: 0;
+}
+
+.sidebar-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+a.sidebar-title-link {
+    color: var(--text-normal);
+    text-decoration: none;
+}
+a.sidebar-title-link:hover {
+    color: white;
+}
+
+.sidebar-toggle-button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar-toggle-button:hover {
+    background-color: var(--background-modifier-hover);
+    color: var(--text-normal);
+}
+.sidebar-toggle-button svg {
+    width: 18px;
+    height: 18px;
+}
+
+.sidebar-nav {
+    padding: 0.75rem;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.nav-collection-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 1.5rem 0 0.5rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.nav-collection-title img,
+.nav-collection-title svg {
+    width: 16px;
+    height: 16px;
+    opacity: 0.8;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-list.root-list {
+    margin-bottom: 0.5rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.nav-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.nav-link:hover {
+    background-color: var(--background-modifier-hover);
+    color: var(--text-normal);
+}
+
+.nav-link.is-active {
+    background-color: var(--interactive-accent);
+    color: white;
+}
+
+.nav-empty {
+    font-size: 0.85rem;
+    color: var(--text-faint);
+    padding: 0.25rem 0.75rem;
+    font-style: italic;
+}
+
+
+/* --- Collapsed State --- */
+
+.page-wrapper.sidebar-collapsed .sidebar {
+    --sidebar-width: 0px;
+    overflow: hidden;
+    padding: 0;
+    border-right: none;
+}
+
+.page-wrapper.sidebar-collapsed .sidebar > * {
+    display: none;
+}
+
+.page-wrapper.sidebar-collapsed {
+    grid-template-columns: 0px 3px 1fr;
+}
+
+/* A bit of a hack to show the toggle button when collapsed */
+.page-wrapper.sidebar-collapsed .sidebar-resizer {
+    position: relative;
+    background-color: var(--background-primary);
+}
+.page-wrapper.sidebar-collapsed .sidebar-resizer:hover {
+    background-color: var(--interactive-accent);
+}
+
+.page-wrapper.sidebar-collapsed .sidebar-toggle-button {
+    display: flex;
+    position: absolute;
+    top: 10px;
+    left: -1px; /* Overlap the resizer */
+    z-index: 20;
+    background-color: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 0 6px 6px 0;
+    padding: 8px;
+    transform: translateX(100%); /* Move it onto the content pane */
+}
+.page-wrapper.sidebar-collapsed .sidebar-toggle-button svg {
+    transform: scaleX(-1); /* Flip icon */
+}

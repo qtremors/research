@@ -11,79 +11,46 @@ layout: null
 
     <link rel="stylesheet" href="index.css">
 
+    <link rel="stylesheet" href="assets/css/main-layout.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Research Archive</h1>
-            <p>A curated collection of research, notes, and technical deep dives.</p>
-        </header>
+    
+    <div class="page-wrapper">
+        
+        <aside class="sidebar">
+            {% include sidebar.html %}
+        </aside>
 
-        <main>
-            <h2>Research Subjects Index</h2>
+        <div class="sidebar-resizer"></div>
 
-            <section class="index-section">
-                <h3>
-                    <img src="assets/python.svg" alt="Python Icon" width="24" height="24">
-                    Python
-                </h3>
-                <p>
-                    A collection of dedicated documents covering everything from core syntax to advanced libraries and development practices.
-                </p>
+        <div class="content-wrapper">
 
-                <ul class="file-list">
-                    {% assign notes = site.python | sort: 'title' %}
-                    {% for note in notes %}
-                        <li>
-                            <a href="{{ note.url | relative_url }}">
-                                <span>{{ note.title | default: "Untitled Note" }}</span>
-                                <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                    {% else %}
-                        <div class="empty-section">
-                           <p>No research notes found in this section yet.</p>
-                        </div>
-                    {% endfor %}
-                </ul>
-            </section>
+            <div class="container">
+                <header>
+                    <h1>Research Archive</h1>
+                    <p>A curated collection of research, notes, and technical deep dives.</p>
+                </header>
 
-            <section class="index-section">
-                <h3>
-                    <img src="assets/django.svg" alt="Django Icon" width="24" height="24">
-                    Django
-                </h3>
-                <p>
-                    Notes and research on the Django web framework, from models to views and deployment.
-                </p>
+                <main>
+                    <h2>Research Subjects Index</h2>
 
-                <ul class="file-list">
-                    {% assign notes = site.django | sort: 'title' %}
-                    {% for note in notes %}
-                        <li>
-                            <a href="{{ note.url | relative_url }}">
-                                <span>{{ note.title | default: "Untitled Note" }}</span>
-                                <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                    {% else %}
-                        <div class="empty-section">
-                           <p>No research notes found in this section yet.</p>
-                        </div>
-                    {% endfor %}
-                </ul>
-            </section>
-            
-        </main>
+                    <section class="index-section">
+                        </section>
 
-        <footer>
-            <p>&copy; 2025 Tremors Research Hub.</p>
-        </footer>
-    </div>
+                    <section class="index-section">
+                        </section>
+                    
+                </main>
+
+                <footer>
+                    <p>&copy; 2025 Tremors Research Hub.</p>
+                </footer>
+            </div>
+            </div>
+        </div>
+    <script src="assets/js/main-layout.js"></script>
+
 </body>
 </html>
